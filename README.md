@@ -1,6 +1,8 @@
 # Get mixed content
 Simple nodejs script for checking mixed content on https page.
 
+This is not a production ready code, just my simple script which helped me one day and which also can be a little example of using JavaScript. The script does not render document and does not process inline styles.. so, it should be the next iteration.
+
 ### Instruction
 Be sure you have node `>=6.0.0`, and then:
 ```
@@ -34,6 +36,3 @@ Page has returned another status code:
 $ node getmixc.js https://www.apple.com/hello
 Error: The page has returned 404 status code
 ```
-
-### Notes
-This is not a production ready code, just my simple script which helped me one day and which also can be a little example of using javascript.
