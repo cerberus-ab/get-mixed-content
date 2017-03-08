@@ -54,28 +54,28 @@ class MixedContentReport extends MixedContent {
 // function tries to get https page body & returns promise
 function getHttpsPageBody(pageUrl) {
     return new Promise((resolve, reject) => {
-            // send https get request
-            https.get(pageUrl, res => {
+        // send https get request
+        https.get(pageUrl, res => {
             // if status code is ok then continue
             if (res.statusCode === 200) {
-        let buff = [];
-        res
-        // accumulate received data
-            .on('data', data => buff.push(data))
-        // on ending resolve with accumulated buffer
-    .on('end', () => resolve(Buffer.concat(buff).toString()))
-        ;
-    }
-    // else if status code is redirect then show location
-else if (res.statusCode > 300 && res.statusCode < 400) {
-        reject(Error(`The page is redirected to "${res.headers.location}"`));
-    }
-    // else show wrong status code
-    else {
-        reject(Error(`The page has returned ${res.statusCode} status code`));
-    }
-}).on('error', e => reject(Error(`The page is unreachable`)));
-});
+                let buff = [];
+                res
+                    // accumulate received data
+                    .on('data', data => buff.push(data))
+                    // on ending resolve with accumulated buffer
+                    .on('end', () => resolve(Buffer.concat(buff).toString()))
+                ;
+            }
+            // else if status code is redirect then show location
+            else if (res.statusCode > 300 && res.statusCode < 400) {
+                reject(Error(`The page is redirected to "${res.headers.location}"`));
+            }
+            // else show wrong status code
+            else {
+                reject(Error(`The page has returned ${res.statusCode} status code`));
+            }
+        }).on('error', e => reject(Error(`The page is unreachable`)));
+    });
 }
 
 // get mixed content on https page
