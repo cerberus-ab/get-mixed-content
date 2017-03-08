@@ -4,11 +4,11 @@ Simple nodejs script for checking mixed content on https page.
 This is not a production ready code, just my simple script which helped me one day and which also can be a little example of using JavaScript. The script does not render document and does not process inline styles.. so, it should be the next iteration.
 
 ### Instruction
-Be sure you have node `>=6.0.0`, and then:
+Be sure you have nodejs `>=6.0.0`, and then:
 ```
 $ node getmixc.js URL
 ```
-show you mixed content requests on the https page by URL.
+will show you mixed content requests on the https page by URL.
 
 ### Examples
 Page with unsecure mixed content requests:
