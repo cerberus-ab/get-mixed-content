@@ -18,7 +18,7 @@ const SCHEMES = ['http'];
 // Links collector class
 class LinksCollector {
     static makePattern(ls, ps) {
-        return new RegExp(`<(${Object.keys(ls).map(tag => `${tag}.*?${ls[tag]}`).join('|')})=[\"\'](${ps.join('|')}):.*?>`, 'mig');
+        return new RegExp(`<(?:${Object.keys(ls).map(tag => `${tag}.*?${ls[tag]}`).join('|')})=[\"\']\s*(?:blob:)?(?:${ps.join('|')}):\/\/.*?>`, 'mig');
     }
     constructor(ls, ps) {
         this._regexp = this.constructor.makePattern(ls || LINKS, ps || SCHEMES);
