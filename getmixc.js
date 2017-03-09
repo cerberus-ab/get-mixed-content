@@ -51,20 +51,25 @@ class MixedContentReport extends MixedContent {
     }
 }
 
-// function tries to get https page body & returns promise
-function getHttpsPageBody(pageUrl) {
+// read page body by response
+function readPageBody(res) {
     return new Promise((resolve, reject) => {
-        // send https get request
+        let buff = [];
+        res
+            // accumulate received data
+            .on('data', data => buff.push(data))
+            // on ending resolve with accumulated buffer
+            .on('end', () => resolve(Buffer.concat(buff).toString()))
+        ;
+    });
+}
+// send request for https page by url
+function getHttpsPage(pageUrl) {
+    return new Promise((resolve, reject) => {
         https.get(pageUrl, res => {
-            // if status code is ok then continue
+            // if status code is ok then resolve
             if (res.statusCode === 200) {
-                let buff = [];
-                res
-                    // accumulate received data
-                    .on('data', data => buff.push(data))
-                    // on ending resolve with accumulated buffer
-                    .on('end', () => resolve(Buffer.concat(buff).toString()))
-                ;
+                resolve(res);
             }
             // else if status code is redirect then show location
             else if (res.statusCode > 300 && res.statusCode < 400) {
@@ -79,7 +84,8 @@ function getHttpsPageBody(pageUrl) {
 }
 
 // get mixed content on https page
-getHttpsPageBody(url.parse(process.argv[2])).then(
-    body => print(new MixedContentReport(body)),
-    error => print(error + '\n')
-);
+getHttpsPage(url.parse(process.argv[2]))
+    .then(res => readPageBody(res))
+    .then(body => print(new MixedContentReport(body)))
+    .catch(error => print(error + '\n'))
+;
