@@ -1,6 +1,7 @@
 # Get mixed content
 Simple nodejs script for checking HTTPS page for unsecure HTTP requests which are considered mixed content.
 
+### About
 This is not a production-ready code, just my simple script which helped me one day and which also can be a little example of using JavaScript. The script does not render document and does not process inline styles.. so, it should be the next iteration. Also the script does not classify mixed content as passive/display or active content, it is pretty simply. 
 
 ### Instruction
