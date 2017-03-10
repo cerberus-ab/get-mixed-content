@@ -42,4 +42,4 @@ Error: The page has returned 404 status code
 ```
 
 ### See also
-[List redirect chain](ls-redirect-chain)
+[List redirect chain](https://github.com/cerberus-ab/ls-redirect-chain)
