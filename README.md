@@ -40,3 +40,6 @@ Page has returned another status code:
 $ node getmixc.js https://www.apple.com/hello
 Error: The page has returned 404 status code
 ```
+
+### See also
+[List redirect chain](ls-redirect-chain)
